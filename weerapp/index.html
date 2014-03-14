@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<style type="text/css">
+#status{
+font-size:35px;
+}
+#weer{
+font-size:55px;
+padding-top:30px;
+}
+#plaats{
+padding-top:60px;
+text-align:center;
+}
+#container{
+width:300px;
+height:500px;
+font-family:helvetica;
+margin-left:auto;
+margin-right:auto;
+background-color:#6699FF;
+color:white;
+border: 1px black solid;
+}
+#morgen{
+margin-left:auto;
+margin-right:auto;
+height:50px;
+margin-top:40px;
+text-align:center;
+}
+#icon{
+width:150px;
+height:150px;
+margin-left:auto;
+margin-right:auto;
+}
+img{
+width:150px;
+height:150px;
+padding-top:10px;
+}
+
+</style>
+</head>
+<body onLoad="getLocation()">
+
+<div id="container">
+
+
+	
+	<div id="plaats">
+	<div id="status"></div>
+	<div id="weer"></div>
+	<div id="icon"><img id="foto" src=""/></div>
+<div id="morgen">
+<p>TOMORROW</p>
+	
+	<div id="min"></div>
+	<div id="max"></div>
+
+</div>
+	</div>
+	
+	
+	
+	</div>
+		<script>
+var x=document.getElementById("status");
+var y=document.getElementById("weer");
+var q=document.getElementById("min");
+var m=document.getElementById("max");
+var f=document.getElementById("foto");
+function getLocation()
+  {
+  if (navigator.geolocation)
+    {
+    navigator.geolocation.getCurrentPosition(showPosition);
+    }
+  }
+function showPosition(position)
+  {
+		  $.ajax({
+		  url: "https://api.forecast.io/forecast/292552a573666b64e7b46da425cf4634/" + position.coords.latitude + "," + position.coords.longitude,
+		  dataType: "jsonp",
+		  success: function (data) {
+		  x.innerHTML=data.currently.summary;
+		  y.innerHTML=Math.round((data.currently.temperature - 32)/1.8) + " <strong>&degC</strong>";
+		  
+		  q.innerHTML="Min " + Math.round((data.daily.data[0].temperatureMin - 32)/1.8)+ " <strong>&degC</strong>";
+		  m.innerHTML="Max " + Math.round((data.daily.data[0].temperatureMax - 32)/1.8)+ " <strong>&degC</strong>";
+		  var temp = data.currently.icon;
+		  console.log(data);
+		  if(temp == "partly-cloudy-night" || temp == "partly-cloudy-day" ){
+			f.src = "http://s4.postimg.org/3pngku0kd/cloudy.png";
+
+			  } 
+			  else
+			  { 
+			  f.src = "http://www.iconsdb.com/icons/preview/blue/sun-2-xxl.png";
+			  }
+		}});
+
+
+}
+	</script>
+</body>
+</html>
