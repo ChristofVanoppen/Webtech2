@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	body
+	{
+		background-color: #e9eaed;
+		font-family: georgia;
+	}
+	#askbox
+	{
+		background-color: white;
+		width: 600px;
+		height: 370px;
+		margin: auto;
+		margin-top: 20px;
+	}
+	#name
+	{
+		width:200px;
+		height: 20px;
+		text-align: center;
+	}
+	#message
+	{
+		width:500px;
+		height: 200px;
+		text-align: center;
+		margin-top: 50px;
+	}
+	#bar 
+	{
+		background-color: #6d84b4;
+		margin-left: auto;
+		margin-right: auto;
+		width: 750px;
+		height: 500px;
+	}
+	h1
+	{
+		color: white;
+		text-align: center;
+	}
+	form
+	{
+		width:500px;
+		margin-left:auto;
+		margin-right:auto;
+		padding-top:25px;
+	}
+	</style>
+</head>
+<body>
+	
+	<div id="bar">
+		<h1>IMD ASK WALL</h1>
+	
+
+		<div id="askbox">
+			<form>  
+				<input type="text" class="textarea" id="name" placeholder="Name" required></br>
+       			 <input type="text" class="textarea" id="message" placeholder="Question" required></br>
+       			 <input type="button" id="send" value="Send" >
+			</form>
+		</div>
+
+	</div>
+</body>
+</html>
