@@ -18,8 +18,7 @@
     	padding:0;
 	}
 	#chat{
-		height: 430px;
-		width: 400px;
+		height: 400px;
 	}
 	#contentWrap{
 		display:none;
@@ -29,12 +28,14 @@
 		border: 2px solid black;
 		margin-top: 50px;
 		margin-left:100px;
+		width: 1000px;
+		height:400px;
 	}
 	#users{
 		float: right;
 		background-color: #19ABCD;
 		width: 100px;
-		height: 510px;
+		
 		text-align:center;
 		color:white;
 	}
@@ -103,7 +104,7 @@
 	}
 	h3{
 		float:right;
-		margin-right: 50%;
+		margin-right: 45%;
 		font-size: 1.5em;
 	}
 	.error{
@@ -115,12 +116,18 @@
 	}
 	.msg{
 		font-size: 1em;
+		border-radius: 20px black solid;
+		padding-left: 10px;
 	}
 	h4{
 		float:right;
 		margin-right: 25px;
 		margin-top: 19px;
 		display: none;
+	}
+	#message{
+		margin-left: 34%;
+		text-align: center;
 	}
 	</style>
 </head>
@@ -129,7 +136,7 @@
 	<div id="header">
 		<img src="http://www.weareimd.be/theme/weareimd//assets/images/logo.svg" alt="" id="banner">
 		<h4>Online<br/>
-			Users:</h4><h3>IMD WALL</h3>
+			Users:</h4><h3>IMD WALL / CHAT</h3>
 		
 	</div>
 	<img src="http://www.weareimd.be/theme/weareimd//assets/images/pixelman.png" alt="" id="logo">
@@ -193,16 +200,16 @@
 				$users.html(html);
 			});
 
-			$messageForm.submit(function(e){
-				e.preventDefault();
+			$messageForm.submit(function(e){											// vraag stellen in form
+				e.preventDefault();														//geen refresh van pg
 				socket.emit('send message', $messageBox.val(), function(data){
 					$chat.append('<span class="error"><b>' + data + "</span><br/>");
 				});
 				$messageBox.val('');
 			});
 
-			socket.on('load old msgs', function(docs){
-				for(var i=docs.length-1; i >= 0; i--){
+			socket.on('load old msgs', function(docs){									//laden van berichten die voor het inloggen 
+				for(var i=docs.length-1; i >= 0; i--){									//er al waren
 					displayMsg(docs[i]);
 				}
 			});
